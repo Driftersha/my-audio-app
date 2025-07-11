@@ -1,0 +1,17 @@
+/* Global */
+/* ------------------------------------ */
+@import 'global/fonts.css';
+@import 'global/reboot.css';
+@import 'global/container.css';
+@import 'global/visually-hidden.css';
+
+/* Blocks */
+/* ------------------------------------ */
+@import 'blocks/btn.css';
+@import 'blocks/header.css';
+@import 'blocks/search-bar.css';
+@import 'blocks/auth-form.css';
+@import 'blocks/sidebar.css';
+@import 'blocks/audio-list.css';
+@import 'blocks/playback-controls.css';
+@import 'blocks/footer-player.css';

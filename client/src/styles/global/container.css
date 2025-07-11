@@ -1,0 +1,36 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.container--header {
+  padding: 0 30px 0 47px;
+}
+
+.container--main {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 46px 0 30px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container--footer {
+  max-width: 1440px;
+  padding: 0 30px;
+}
+
+@media (max-width: 768px) {
+  .container--header,
+  .container--main {
+    padding: 0 16px;
+    margin: 0;
+  }
+
+  .container--footer {
+    padding: 0 8px;
+  }
+}

@@ -1,0 +1,41 @@
+.btn {
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaaaaa;
+  font-family: inherit;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn--logout {
+  color: #171717;
+}
+
+.btn--favorites {
+  color: #edc4b6;
+}
+
+.btn--shuffle.active,
+.btn--favorites.active,
+.btn--repeat.active {
+  color: #fc6d3e;
+}
+
+.btn--pause {
+  background-color: #aaaaaa;
+  width: 40px;
+  height: 40px;
+  border-radius: 80px;
+}
+
+@media (max-width: 768px) {
+  .btn--favorites {
+    margin-left: auto;
+  }
+}

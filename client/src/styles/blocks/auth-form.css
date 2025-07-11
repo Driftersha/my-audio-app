@@ -1,0 +1,82 @@
+.auth-form__wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-form__inner {
+  max-width: 400px;
+  width: 100%;
+  padding: 40px 30px;
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.auth-form__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.auth-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form__input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.auth-form__submit {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #fc6d3e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-form__submit:hover {
+  background-color: #e65a28;
+}
+
+.auth-form__toggle {
+  text-align: center;
+  font-size: 14px;
+  color: #fc6d3e;
+  cursor: pointer;
+}
+
+.auth-form__message {
+  display: none;
+  font-size: 14px;
+  margin-top: 8px;
+  margin: 0;
+}
+
+.auth-form__message--visible {
+  display: block;
+}
+
+.auth-form__message--error {
+  color: red;
+}
+
+.auth-form__message--success {
+  color: green;
+}

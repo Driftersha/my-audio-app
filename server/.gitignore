@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+dist/
+.env
+
+# MacOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Кэш и сборщики
+.cache/
+.parcel-cache/
