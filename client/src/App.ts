@@ -6,13 +6,17 @@ import { FooterPlayer } from './components/FooterPlayer';
 import { getTracks } from './api/tracks';
 import { favoritesStore } from './store/favorites';
 import type { Track } from './types/track';
+import { RouterController } from './controller/RouterController';
+import { PlayerController } from './controller/PlayerController';
+
 
 export class App {
   el: HTMLElement;
 
   private footerPlayer: FooterPlayer;
-  private AudioListSection: AudioListSection;
-  private currentTrack: Track | null = null;
+  private playerController: PlayerController;
+  private audioListSection: AudioListSection;
+
   private allTracks: Track[] = [];
   private header: Header;
   private searchQuery = '';
@@ -25,11 +29,13 @@ export class App {
     });
 
     this.footerPlayer = new FooterPlayer();
+    this.playerController = new PlayerController(this.footerPlayer);
 
-    this.AudioListSection = new AudioListSection(
+
+    this.audioListSection = new AudioListSection(
       (track: Track) => {
-        this.setCurrentTrack(track);
-        this.footerPlayer.play();
+        this.playerController.setTrack(track, this.audioListSection.getTracks());
+        this.playerController.play();
       },
       favoritesStore
     );
@@ -38,7 +44,7 @@ export class App {
     this.el = el('div.app', [
       sidebar.el,
       this.header.el,
-      el('main.content', this.AudioListSection.el),
+      el('main.content', this.audioListSection.el),
       this.footerPlayer.el,
     ]);
 
@@ -73,30 +79,13 @@ export class App {
   }
 
   private renderTracksByRoute() {
-    const hash = window.location.hash;
-    const favoriteIds = favoritesStore.getFavoriteIds();
+    const router = new RouterController(this.allTracks, this.searchQuery);
+    const filtered = router.filterTracksByRoute();
 
-    let filtered = this.allTracks.map(track => ({
-      ...track,
-      isFavorite: favoriteIds.has(track.id),
-    }));
-
-    if (hash === '#/favorites') {
-      filtered = filtered.filter(track => track.isFavorite);
-    }
-
-    if (this.searchQuery.trim()) {
-      const query = this.searchQuery.toLowerCase();
-      filtered = filtered.filter(track =>
-        track.title.toLowerCase().includes(query) ||
-        track.artist.toLowerCase().includes(query)
-      );
-    }
-
-    this.AudioListSection.setTracks(filtered);
+    this.audioListSection.setTracks(filtered);
 
     if (filtered.length > 0) {
-      this.setCurrentTrack(filtered[0], filtered);
+      this.playerController.setTrack(filtered[0], filtered);
     }
   }
 
@@ -107,19 +96,10 @@ export class App {
 
   private updateFavoritesState() {
     const favoriteIds = favoritesStore.getFavoriteIds();
-    this.AudioListSection.updateFavorites(favoriteIds);
-
-    if (this.currentTrack) {
-      this.currentTrack.isFavorite = favoriteIds.has(this.currentTrack.id);
-      this.footerPlayer.setTrack(this.currentTrack, this.AudioListSection.getTracks());
-    }
+    this.audioListSection.updateFavorites(favoriteIds);
+    this.playerController.updateFavoriteState(favoriteIds, this.audioListSection.getTracks());
   }
 
-  private setCurrentTrack(track: Track, trackList: Track[] = []) {
-    this.currentTrack = track;
-    this.footerPlayer.setTrack(track, trackList);
-
-  }
 }
 
 

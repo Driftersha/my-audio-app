@@ -11,6 +11,7 @@ function resolveCover(cover: string | undefined): string {
   return isFilename ? `/img/${cover}` : cover;
 }
 
+
 export class AudioListSection {
   el: HTMLElement;
   private tracks: Track[] = [];
