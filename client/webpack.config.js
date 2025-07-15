@@ -53,5 +53,5 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
-  mode: 'development',
+  mode: 'production',
 };
